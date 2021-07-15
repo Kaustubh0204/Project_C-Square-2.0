@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<cool-ad>
+  <template class="ad__mobile" style="color:black;">
+    // Mobile ad HTML code with inline script
+  </template>
+  <template class="ad__desktop">
+    // Desktop ad HTML code with inline script
+  </template>
+</cool-ad>
+
+
+<script>
+  class AdComponent extends HTMLElement {
+    connectedCallback() {
+      const isMobile = matchMedia('(max-width: 700px)').matches;    
+      const ad = document.currentScript.closest('.ad');
+      const content = this
+        .querySelector(isMobile ? '.ad__mobile' : '.ad__desktop')
+        .content;
+      
+      this.appendChild(document.importNode(content, true));
+    }
+  }
+  
+  customElements.define('cool-ad', AdComponent);
+  </script>
+</body>
+</html>
+
+
+<!-- <div class="card text-white bg-danger mb-3" style="max-width: 18rem; z-index: 1; margin: 1vw; font-family: Poppins; font-weight: 700;">
+  <div class="card-header">Confirmed cases</div>
+  <div class="card-body">
+    <h5 class="card-title" style="font-weight: 700;"><?php echo $total_confirmed;?></h5>
+  </div>
+</div>
+
+<div class="card text-white bg-success mb-3" style="max-width: 18rem; z-index: 1; margin: 1vw; font-family: Poppins; font-weight: 700;">
+  <div class="card-header">Recovered cases</div>
+  <div class="card-body">
+    <h5 class="card-title" style="font-weight: 700;"><?php echo $total_recovered;?></h5>
+  </div>
+</div>
+
+<div class="card text-white bg-dark mb-3" style="max-width: 18rem; z-index: 1; margin: 1vw; font-family: Poppins; font-weight: 700;">
+  <div class="card-header">Deaths reported</div>
+  <div class="card-body">
+    <h5 class="card-title" style="font-weight: 700;"><?php echo $total_deaths;?></h5>
+  </div>
+</div> -->
